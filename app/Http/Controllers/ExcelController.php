@@ -8,6 +8,8 @@ use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
+
 
 
 
@@ -26,7 +28,7 @@ class ExcelController extends Controller
     */
     public function exportExcel($type) 
     {
-        return Excel::download(new ProductsExport, 'transactions.'.$type);
+        return Excel::download(new ProductsExport, 'products.'.$type);
     }
    
     /**
@@ -39,5 +41,11 @@ class ExcelController extends Controller
         $request->session()->put('success', 'Your file is imported successfully in database.');
            
         return back();
+    }
+
+    public function index()
+    {
+        $products = Product::all();
+        return view('home', compact('products'));
     }
 }
