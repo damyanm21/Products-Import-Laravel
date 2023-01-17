@@ -38,14 +38,16 @@ class ExcelController extends Controller
     {
         Excel::import(new ProductsImport,$request->import_file);
 
-        $request->session()->put('success', 'Your file is imported successfully in database.');
+        $request->session()->put('success', 'Your file is imported successfully in the database.');
            
         return back();
     }
 
     public function index()
     {
-        $products = Product::all();
+        $products = Product::get();
+  
         return view('home', compact('products'));
     }
+
 }
