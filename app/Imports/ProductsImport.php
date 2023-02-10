@@ -27,16 +27,17 @@ class ProductsImport implements ToCollection, WithHeadingRow
              '*.description' => 'required',
              '*.price' => 'required',
              
-             //допустими разширения
-             //'file'          => 'required',
-             //'extension'      => 'required|in:csv,xlsx,xls'
              ])->validate();
+
+        $latest = Product::latest()->first();
 
         foreach ($rows as $row) {
             Product::create([
                 'name' => $row['name'],
                 'description' => $row['description'],
                 'price' => $row['price'],
+                'imported' => 0,
+                'importid' => ($latest->importid??0)+1,
             ]);
         }
     }

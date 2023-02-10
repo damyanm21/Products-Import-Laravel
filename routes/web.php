@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MagentoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +32,11 @@ Route::get('exportExcel/{type}', [ExcelController::class, 'exportExcel'])->name(
 Route::post('importExcel', [ExcelController::class, 'importExcel'])->name('importExcel');
 
 Route::get('home', [ExcelController::class, 'index']);
+
+Route::get('token', function () {
+    return view('token');
+});
+
+Route::get('test', [HomeController::class, 'test']);
+
+Route::post('home', [MagentoController::class, 'importMagentoProducts'])->name('importMagento');
