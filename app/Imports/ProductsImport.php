@@ -26,7 +26,6 @@ class ProductsImport implements ToCollection, WithHeadingRow
             '*.name' => 'required',
              '*.description' => 'required',
              '*.price' => 'required',
-             
              ])->validate();
 
         $latest = Product::latest()->first();
